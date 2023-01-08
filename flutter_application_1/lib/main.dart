@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/src/Pages/School/school_page.dart';
 
 import 'src/app.dart';
 import 'src/settings/settings_controller.dart';
@@ -31,19 +32,16 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
+  static final List<Widget> _widgetOptions = <Widget>[
+    const Text(
       'Index 0: Home',
       style: optionStyle,
     ),
-    Text(
+    const Text(
       'Index 1: Business',
       style: optionStyle,
     ),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
+    SchoolPage()
   ];
 
   void _onItemTapped(int index) {
@@ -80,6 +78,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          print("BRAVO");
+        },
+        child: const Icon(Icons.add),
+      ),
+      endDrawer: Drawer(),
     );
   }
 }
