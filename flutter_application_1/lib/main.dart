@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/src/Pages/Business/business_screen.dart';
 import 'package:flutter_application_1/src/Pages/School/school_page.dart';
 
 import 'src/app.dart';
@@ -37,10 +38,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       'Index 0: Home',
       style: optionStyle,
     ),
-    const Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
+    const BusinessScreen(),
     SchoolPage()
   ];
 
