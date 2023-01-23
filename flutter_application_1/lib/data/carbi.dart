@@ -46,9 +46,6 @@ enum FoodSource {
 class SupportedLocales extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get locale => text().withLength(min: 1, max: 25)();
-
-  @override
-  Set<Column> get primaryKey => {id};
 }
 
 class TextContents extends Table {
@@ -56,9 +53,6 @@ class TextContents extends Table {
   TextColumn get originalText => text().withLength(min: 1)();
   IntColumn get originalLocaleId =>
       integer().references(SupportedLocales, #id)();
-
-  @override
-  Set<Column> get primaryKey => {id};
 }
 
 class Translations extends Table {
@@ -68,16 +62,11 @@ class Translations extends Table {
 
   @override
   Set<Column> get primaryKey => {id, localeId};
-
-  // ForeignKeys??
 }
 
 class DailySheets extends Table {
   IntColumn get id => integer().autoIncrement()();
   DateTimeColumn get sheetDate => dateTime().withDefault(currentDateAndTime)();
-
-  @override
-  Set<Column> get primaryKey => {id};
 }
 
 class Logs extends Table {
@@ -86,9 +75,6 @@ class Logs extends Table {
   RealColumn get timeOffset =>
       real().check(timeOffset.isBetweenValues(0, 24))();
   IntColumn get dailySheetId => integer().references(DailySheets, #id)();
-
-  @override
-  Set<Column> get primaryKey => {id};
 }
 
 class GlucoseReadings extends Table {
@@ -97,9 +83,6 @@ class GlucoseReadings extends Table {
   IntColumn get type => intEnum<GlucoseReadingType>()
       .withDefault(Constant(GlucoseReadingType.manual.index))();
   IntColumn get logId => integer().references(Logs, #id)();
-
-  @override
-  Set<Column> get primaryKey => {id};
 }
 
 class Foods extends Table {
@@ -110,17 +93,11 @@ class Foods extends Table {
       intEnum<FoodSource>().withDefault(Constant(FoodSource.custom.index))();
   BoolColumn get isFavorite => boolean().withDefault(const Constant(false))();
   IntColumn get nameId => integer().references(TextContents, #id)();
-
-  @override
-  Set<Column> get primaryKey => {id};
 }
 
 class Units extends Table {
   IntColumn get id => integer().autoIncrement()();
   IntColumn get nameId => integer().references(TextContents, #id)();
-
-  @override
-  Set<Column> get primaryKey => {id};
 }
 
 class FoodUnits extends Table {
@@ -143,25 +120,16 @@ class FoodUnits extends Table {
       real().check(volume.isBiggerOrEqualValue(0)).nullable()();
   IntColumn get foodId => integer().references(Foods, #id)();
   IntColumn get unitId => integer().references(Units, #id)();
-
-  @override
-  Set<Column> get primaryKey => {id};
 }
 
 class Tags extends Table {
   IntColumn get id => integer().autoIncrement()();
   IntColumn get nameId => integer().references(TextContents, #id)();
-
-  @override
-  Set<Column> get primaryKey => {id};
 }
 
 class FoodTags extends Table {
   IntColumn get tagId => integer()();
   IntColumn get foodId => integer()();
-
-  @override
-  Set<Column> get primaryKey => {tagId, foodId};
 }
 
 class InsulinPresets extends Table {
@@ -196,9 +164,6 @@ class Meals extends Table {
       integer().references(GlucoseReadings, #id).nullable()();
   IntColumn get insulinPresetId =>
       integer().references(InsulinPresets, #id).nullable()();
-
-  @override
-  Set<Column> get primaryKey => {id};
 }
 
 class MealItems extends Table {
@@ -218,6 +183,10 @@ class MealItems extends Table {
   Units,
   FoodUnits,
   Tags,
+  FoodTags,
+  InsulinPresets,
+  Meals,
+  MealItems,
 ])
 class CarbiDb extends _$CarbiDb {
   // we tell the database where to store the data with this constructor
