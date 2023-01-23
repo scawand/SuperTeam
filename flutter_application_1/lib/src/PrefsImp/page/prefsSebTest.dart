@@ -16,7 +16,7 @@ class _PrefTestSebState extends State<PrefTestSeb> {
   @override
   void initState() {
     super.initState();
-    name = MySharedPreferences.getUsername() ?? 'vide';
+    //name = MySharedPreferences.getUsername() ?? 'vide';
   }
 
   @override
