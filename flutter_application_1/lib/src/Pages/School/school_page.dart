@@ -13,12 +13,19 @@ import 'package:easy_search_bar/easy_search_bar.dart';
 // Package http pour api
 import 'package:http/http.dart' as http;
 
+late List<String>? stringList;
+
 // test api
 Future<List<Food>> fetchData() async {
   final response = await http.get(Uri.parse(
-      "https://food-nutrition.canada.ca/api/canadian-nutrient-file/food/?lang=en&type=json"));
+      "https://food-nutrition.canada.ca/api/canadian-nutrient-file/food/?lang=fr&type=json"));
   if (response.statusCode == 200) {
     List foodList = jsonDecode(response.body);
+    stringList = foodList
+        .map((e) => Food.fromJson(e).food_description)
+        .cast<String>()
+        .toList();
+
     return foodList.map((e) => Food.fromJson(e)).toList();
   } else {
     throw Exception('Failed to load data');
@@ -26,7 +33,7 @@ Future<List<Food>> fetchData() async {
 }
 
 class SchoolPage extends StatefulWidget {
-  SchoolPage({super.key});
+  SchoolPage({futureFood, super.key});
 
   @override
   State<SchoolPage> createState() => _SchoolPageState();
@@ -80,7 +87,7 @@ class _SchoolPageState extends State<SchoolPage> {
             child: EasySearchBar(
               title: const Text('Search'),
               onSearch: (value) => setState(() => searchValue = value),
-              suggestions: noms,
+              suggestions: stringList,
             ),
           ),
         ),
@@ -97,7 +104,8 @@ class _SchoolPageState extends State<SchoolPage> {
                   return ListView.builder(
                       itemCount: snapshot.data?.length,
                       itemBuilder: (context, index) {
-                        return Text(snapshot.data![index].food_description);
+                        return Card(
+                            child: Text(snapshot.data![index].food_code));
                       });
                 } else if (snapshot.hasError) {
                   return Text('${snapshot.error}');

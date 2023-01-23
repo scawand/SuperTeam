@@ -1,41 +1,11 @@
-      
-      
-      
-      
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
 
+class MyWidget extends StatelessWidget {
+  const MyWidget({super.key});
 
-
-
-
-// AJFIUOHFJUKEHSJIDF HJKHFJKHJKDHJKHJK:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
-      
-      
-      // Card(
-      //   child: CheckboxListTile(
-      //     title: Text("Michael"),
-      //     value: _checked,
-      //     onChanged: (newValue) {
-      //       setState(() {
-      //         _checked = newValue!;
-      //       });
-      //     },
-      //     activeColor: Colors.red,
-      //   ),
-      // ),
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
