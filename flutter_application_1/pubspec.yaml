@@ -12,8 +12,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_localizations:
-    sdk: flutter
+  flutter_localizations: # Add this line
+    sdk: flutter         # Add this line
+  intl: ^0.17.0 # Add this line
+  easy_search_bar: ^2.4.2
+  indent: ^2.0.0
+  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:
