@@ -40,7 +40,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       'Index 0: Home',
       style: optionStyle,
     ),
-    const BusinessScreen(),
+    const BusinessPage(),
     SchoolPage()
   ];
 
@@ -78,13 +78,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          print("BRAVO");
-        },
-        child: const Icon(Icons.add),
-      ),
-      endDrawer: Drawer(),
+      endDrawer: const Drawer(),
     );
   }
 }
