@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/data/todos.dart';
 import 'package:flutter_application_1/src/Pages/Business/business_screen.dart';
 import 'package:flutter_application_1/src/Pages/School/school_page.dart';
 
@@ -6,7 +7,9 @@ import 'src/app.dart';
 import 'src/settings/settings_controller.dart';
 import 'src/settings/settings_service.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
