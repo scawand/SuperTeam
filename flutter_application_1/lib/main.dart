@@ -5,12 +5,10 @@ import 'package:flutter_application_1/src/Home/home.dart';
 //import 'package:flutter_application_1/src/Home/home.dart';
 import 'package:flutter_application_1/src/Pages/Business/business_screen.dart';
 import 'package:flutter_application_1/src/Pages/School/school_page.dart';
-
 import 'package:flutter_application_1/src/PrefsImp/page/prefsSebTest.dart';
 import 'package:flutter_application_1/src/librairiesSeb/sharedPreferences.dart';
-import 'src/app.dart';
-import 'src/settings/settings_controller.dart';
-import 'src/settings/settings_service.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Future main() async {
   await MySharedPreferences.init();
@@ -24,9 +22,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: _title,
-      home: MyStatefulWidget(),
+    return MaterialApp(
+      theme: ThemeData(primarySwatch: Colors.orange),
+      title: "titre",
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+
+        // ... app-specific localization delegate[s] here
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate
+      ],
+      supportedLocales: const [
+        Locale('en', 'US'), // English
+        Locale('fr', 'CA'), // Francais
+      ],
+      home: const MyStatefulWidget(),
     );
   }
 }
@@ -61,25 +72,24 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('BottomNavigationBar Sample'),
+        title: Text(AppLocalizations.of(context)!.helloWorld),
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
+        items: <BottomNavigationBarItem>[
+          const BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home3',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.business),
             label: 'Business',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
-          ),
+              icon: const Icon(Icons.school),
+              label: AppLocalizations.of(context)!.school),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],
@@ -91,7 +101,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         },
         child: const Icon(Icons.add),
       ),
-      endDrawer: Drawer(),
+      endDrawer: const Drawer(),
     );
   }
 }
