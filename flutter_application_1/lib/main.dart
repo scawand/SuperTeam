@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/src/Home/home.dart';
+//import 'package:flutter_application_1/src/Home/home.dart';
 import 'package:flutter_application_1/src/Pages/Business/business_screen.dart';
 import 'package:flutter_application_1/src/Pages/School/school_page.dart';
 
+import 'package:flutter_application_1/src/PrefsImp/page/prefsSebTest.dart';
+import 'package:flutter_application_1/src/librairiesSeb/sharedPreferences.dart';
 import 'src/app.dart';
 import 'src/settings/settings_controller.dart';
 import 'src/settings/settings_service.dart';
 
-void main() => runApp(const MyApp());
+Future main() async {
+  await MySharedPreferences.init();
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -34,10 +41,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static final List<Widget> _widgetOptions = <Widget>[
-    const Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
+    /*const HomePage(
+      title: "sdf",
+    ),*/
+    const PrefTestSeb(),
     const BusinessScreen(),
     SchoolPage()
   ];
@@ -61,7 +68,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Home',
+            label: 'Home3',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.business),
