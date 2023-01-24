@@ -632,6 +632,7 @@ class $DailySheetsTable extends DailySheets
       'sheet_date', aliasedName, false,
       type: DriftSqlType.dateTime,
       requiredDuringInsert: false,
+      defaultConstraints: GeneratedColumn.constraintIsAlways('UNIQUE'),
       defaultValue: currentDateAndTime);
   @override
   List<GeneratedColumn> get $columns => [id, sheetDate];

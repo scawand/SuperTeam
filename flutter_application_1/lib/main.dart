@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/src/Pages/Business/business_screen.dart';
+import 'package:flutter_application_1/data/carbi.dart';
+import 'package:flutter_application_1/src/Pages/DailySheet/dailysheet_page.dart';
 import 'package:flutter_application_1/src/Pages/School/school_page.dart';
+import 'package:provider/provider.dart';
 
-import 'src/app.dart';
-import 'src/settings/settings_controller.dart';
-import 'src/settings/settings_service.dart';
-
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -40,7 +36,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       'Index 0: Home',
       style: optionStyle,
     ),
-    const BusinessPage(),
+    const DailySheetPage(),
     SchoolPage()
   ];
 

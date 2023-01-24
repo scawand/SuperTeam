@@ -70,7 +70,8 @@ class Translations extends Table {
 
 class DailySheets extends Table {
   IntColumn get id => integer().autoIncrement()();
-  DateTimeColumn get sheetDate => dateTime().withDefault(currentDateAndTime)();
+  DateTimeColumn get sheetDate =>
+      dateTime().withDefault(currentDateAndTime).unique()();
 }
 
 class Logs extends Table {
@@ -194,6 +195,38 @@ class MealItems extends Table {
 ])
 class CarbiDb extends _$CarbiDb {
   CarbiDb() : super(_openConnection());
+
+  Future<int> addDailySheet(DailySheetsCompanion entry, {InsertMode? mode}) {
+    return into(dailySheets).insert(entry, mode: mode);
+  }
+
+  Future<bool> dailySheetWithDateExists(DateTime dateTime) {
+    return (select(dailySheets)..where((t) => t.sheetDate.equals(dateTime)))
+        .getSingleOrNull()
+        .then((value) => value != null);
+  }
+
+  Future<List<DailySheet>> getAllDailySheets() {
+    return (select(dailySheets)
+          ..orderBy([
+            (d) =>
+                OrderingTerm(expression: d.sheetDate, mode: OrderingMode.desc)
+          ]))
+        .get();
+  }
+
+  Future<DailySheet> getDailySheet(int id) {
+    return (select(dailySheets)..where((t) => t.id.equals(id))).getSingle();
+  }
+
+  Future<DailySheet> getDailySheetByDate(DateTime dateTime) {
+    return (select(dailySheets)..where((t) => t.sheetDate.equals(dateTime)))
+        .getSingle();
+  }
+
+  Future<int> removeAllDailySheet() {
+    return delete(dailySheets).go();
+  }
 
   @override
   int get schemaVersion => 1;
